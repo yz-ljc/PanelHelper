@@ -61,4 +61,6 @@ npm run release  # 构建并生成 ZIP 和 SHA-256 校验文件
 - [安全说明](SECURITY.md)
 - [第三方组件声明](THIRD_PARTY_NOTICES.md)
 
-本项目尚未指定项目许可证。第三方组件的许可证声明独立保留。
+## LICENSE
+
+- [MIT](./LICENSE)
