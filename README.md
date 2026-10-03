@@ -1,66 +1,49 @@
+### 本项目与开放平台无关，也不是官方产品，仅为个人分享工具，请您知晓
+
 # 指令面板设置
 
-QQ 机器人自定义菜单与指令面板的本地配置工具。使用机器人的 AppID 和 AppSecret 登录，读取机器人资料并管理 QQ 官方接口中的配置。
+QQ 机器人自定义菜单与指令面板配置工具。支持菜单及子项拖动排序、四种聊天场景、关联对象管理和 JSON 导入导出。
 
-界面基于 AtriMeow 的 `MenuPanelView.vue` 提取，保留菜单编辑、手机预览和场景标签设计。侧栏展示当前机器人的基本信息。项目拥有独立的构建、测试和本地服务，不依赖 AtriMeow 后端或数据库。
+本地运行，使用 AppID / AppSecret 登录；凭据仅存于进程内存，不写入文件。登录和同步配置需要联网。
 
-## 功能
+## 预览
 
-- 自定义菜单：发送消息、HTTPS 链接、开关、折叠子菜单和拖动排序。
-- 指令面板：私聊、群聊、频道文字子频道、频道私信四种场景。
-- 面板创建、编辑、删除，以及指定用户或群的关联管理。
-- 单项 JSON 导入与导出，兼容原有 `atribot-menu-panel` 配置格式。
-- 机器人名称、头像、AppID、OpenID 和分享链接展示。
-- AppSecret 和访问令牌仅保存在本地服务进程内存中。
+### 自定义菜单
 
-## 使用分发包
+![自定义菜单编辑与手机预览](docs/menu.png)
 
-运行环境：Node.js 22.13.0 或更高版本，支持现代桌面浏览器。启动前可使用 `node --version` 检查版本。
+### 指令面板
 
-1. 解压 `panel-helper-<版本>.zip`。
-2. Windows 双击 `start.cmd`；macOS 或 Linux 执行 `sh start.sh`。
-3. 浏览器自动打开 `http://127.0.0.1:4973`。如未自动打开，可手动访问该地址。
-4. 输入机器人的 AppID、AppSecret 后登录。
-5. 编辑菜单或指令面板，并通过对应保存按钮提交。
+![指令面板管理与手机预览](docs/panel.png)
 
-分发包包含构建后的网页资源和本地服务，无需执行 `npm install`。页面资源不依赖 CDN；登录、读取和保存配置仍需访问 QQ 官方服务，机器人头像也可能从远程地址加载。“本地分发”不代表可以在断网状态下修改 QQ 配置。
+## 使用
 
-启动终端需要保持运行。使用 `Ctrl+C` 关闭服务；退出登录、会话到期或进程结束后需要重新登录。会话有效期为 8 小时。
+需要 **Node.js ≥ 22.13.0**。
 
-默认端口被占用时，可先设置 `PANEL_HELPER_PORT`，再启动服务，例如 PowerShell：
+1. 解压分发包，Windows 运行 `start.cmd`，macOS / Linux 执行 `sh start.sh`。
+2. 打开 `http://127.0.0.1:4973`，输入 AppID 和 AppSecret 登录。
+3. 编辑配置并保存。使用期间保持终端运行，`Ctrl+C` 关闭服务。
 
-```powershell
-$env:PANEL_HELPER_PORT = '4975'
-node server/index.mjs --open
-```
+分发包无需安装依赖。端口可通过环境变量 `PANEL_HELPER_PORT` 修改。
 
 ## 开发
-
-在本项目目录执行：
 
 ```sh
 npm ci
 npm run dev
 ```
 
-开发模式同样使用 `http://127.0.0.1:4973`。本地 HTTP 服务集成 Vite 中间件，前端与 API 使用同一来源。
-
 ```sh
-npm test          # 运行本地模拟接口测试，不连接真实机器人
+npm test         # 模拟接口测试
 npm run build    # 构建前端
-npm start        # 启动构建后的应用
-npm run release  # 构建并生成 ZIP 和 SHA-256 校验文件
+npm start        # 运行构建后的应用
+npm run release  # 生成 ZIP 与 SHA-256，输出至 release/
 ```
-
-输出位于 `release/`，不包含依赖目录、Git 元数据和测试代码。运行时仅依赖 Node.js 内置模块。
 
 ## 文档
 
-- [使用说明](docs/user-guide.md)
-- [架构与开发约定](docs/architecture.md)
-- [安全说明](SECURITY.md)
-- [第三方组件声明](THIRD_PARTY_NOTICES.md)
+[使用说明](docs/user-guide.md) · [开发约定](docs/architecture.md) · [安全说明](SECURITY.md) · [第三方声明](THIRD_PARTY_NOTICES.md)
 
 ## LICENSE
 
-- [MIT](./LICENSE)
+[MIT](LICENSE)
